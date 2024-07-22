@@ -4,6 +4,6 @@
 
 <script setup>
 defineOptions({
-  name: 'DawnButton',
+  name: 'DButton',
 })
 </script>
