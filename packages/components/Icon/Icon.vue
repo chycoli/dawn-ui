@@ -17,7 +17,7 @@ const customStyle = computed(() => ({
 </script>
 
 <template>
-  <i v-bind="$attrs" class="d-icon" :class="[`d-icon-${props.type}`]" :style="customStyle">
+  <i v-bind="$attrs" class="d-icon" :class="[`d-icon--${props.type}`]" :style="customStyle">
     <FontAwesomeIcon v-bind="filterProps" />
   </i>
 </template>
