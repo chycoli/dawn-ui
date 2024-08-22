@@ -1,0 +1,53 @@
+# 忽略 node_modules 目录
+node_modules/
+
+# 忽略编译输出目录
+dist/
+build/
+out/
+
+# 忽略日志文件
+*.log
+
+# 忽略临时文件
+.DS_Store
+Thumbs.db
+*.tmp
+
+# 忽略 IDE 和编辑器的配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# 忽略操作系统生成的文件
+.AppleDouble
+.LSOverride
+._*
+
+# 忽略测试覆盖率报告
+coverage/
+
+# 忽略 Docker 容器文件
+*.docker.*
+
+# 忽略特定的依赖文件
+package-lock.json
+yarn.lock
+
+# 忽略编译器生成的缓存和文件
+*.babel_cache
+/*/*/.eslintcache
+
+# 忽略 Vite 相关的缓存和文件
+.vite/
+node_modules/
+
+# 忽略 Webpack 相关的缓存和文件
+.webpack/
+
+# 忽略 TypeScript 编译文件（如果你使用 TypeScript）
+*.ts
+*.tsx
+tsconfig.json
