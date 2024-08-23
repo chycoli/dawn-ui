@@ -50,4 +50,3 @@ node_modules/
 # 忽略 TypeScript 编译文件（如果你使用 TypeScript）
 *.ts
 *.tsx
-tsconfig.json
