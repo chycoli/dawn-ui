@@ -46,7 +46,3 @@ node_modules/
 
 # 忽略 Webpack 相关的缓存和文件
 .webpack/
-
-# 忽略 TypeScript 编译文件（如果你使用 TypeScript）
-*.ts
-*.tsx
