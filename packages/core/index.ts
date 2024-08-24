@@ -1,3 +1,4 @@
+import '@dawn-ui/theme'
 import components from './components'
 import { makeInstaller } from '@dawn-ui/utils'
 

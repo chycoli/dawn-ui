@@ -1,0 +1,65 @@
+/* 重置所有元素的默认间距 */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 移除列表的默认符号 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 重置链接的默认样式 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 重置图片的默认样式 */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 重置表格的默认样式 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 重置表单元素的默认样式 */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+/* 可选：移除数字输入框的默认上下箭头 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* 可选：重置 HTML5 媒体元素的默认样式 */
+audio,
+canvas,
+video {
+  display: inline-block;
+}
+
+/* 可选：清除浮动 */
+.clearfix::after {
+  display: table;
+  content: "";
+  clear: both;
+}
