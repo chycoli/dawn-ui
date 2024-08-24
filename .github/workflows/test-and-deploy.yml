@@ -86,5 +86,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }} # 使用保存在GitHub Secrets中的token
+          github_token: ${{ secrets.DawnUI_TOKEN }} # 使用保存在GitHub Secrets中的token
           publish_dir: . # 指定要发布的目录
