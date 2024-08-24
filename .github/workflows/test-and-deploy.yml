@@ -1,90 +1,70 @@
-# 定义一个名为"Test and deploy"的工作流
 name: Test and deploy
 
-# 触发条件：当主分支有推送时触发工作流
 on:
   push:
     branches:
       - main
 
-# 工作流包含三个任务：测试、构建和部署
 jobs:
-  # 第一个任务：运行Lint和测试
   test:
     name: Run Lint and Test
-    runs-on: ubuntu-latest # 使用最新的Ubuntu虚拟机运行
+    runs-on: ubuntu-latest
 
     steps:
-      # 步骤1：检出代码库
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 步骤2：设置Node.js环境
       - name: Setup Node
         uses: actions/setup-node@v3
 
-      # 步骤3：全局安装pnpm包管理器
-      - name: Install pnpm 
-        run: npm install -g pnpm
-
-      # 步骤4：使用pnpm安装项目依赖
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      # 步骤5：运行测试脚本
-      - name: Run tests
-        run: npm run test
-
-  # 第二个任务：构建文档
-  build:
-    name: Build docs
-    runs-on: ubuntu-latest # 在最新的Ubuntu环境中运行
-    needs: test # 依赖于测试任务，确保测试通过后再执行
-
-    steps:
-      # 步骤1：检出代码库
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      # 步骤2：设置Node.js环境
-      - name: Setup Node
-        uses: actions/setup-node@v3
-
-      # 步骤3：全局安装pnpm
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # 步骤4：使用pnpm安装项目依赖
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 步骤5：构建文档
+      - name: Run tests
+        run: npm run test
+
+  build:
+    name: Build docs
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build docs
         run: npm run docs:build
 
-      # 步骤6：上传构建好的文档作为artifact，以便后续步骤使用
       - name: Upload docs
         uses: actions/upload-artifact@v3
         with:
           name: docs
           path: ./packages/docs/.vitepress/dist
 
-  # 第三个任务：部署文档到GitHub Pages
   deploy:
     name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest # 在最新的Ubuntu环境中运行
-    needs: build # 依赖于构建任务，确保文档构建完成后才执行部署
-
+    runs-on: ubuntu-latest
+    needs: build
     steps:
-      # 步骤1：下载之前上传的文档artifact
       - name: Download docs
         uses: actions/download-artifact@v3
         with:
           name: docs
 
-      # 步骤2：将下载的文档部署到GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.DawnUI_TOKEN }} # 使用保存在GitHub Secrets中的token
-          publish_dir: . # 指定要发布的目录
+          github_token: ${{ secrets.DawnUI_TOKEN }}
+          publish_dir: .
