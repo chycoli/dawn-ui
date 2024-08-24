@@ -17,7 +17,7 @@ jobs:
     steps:
       # 步骤1：检出代码库
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 步骤2：设置Node.js环境
       - name: Setup Node
@@ -46,7 +46,7 @@ jobs:
     steps:
       # 步骤1：检出代码库
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 步骤2：设置Node.js环境
       - name: Setup Node
