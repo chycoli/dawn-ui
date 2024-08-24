@@ -7,7 +7,7 @@
     "dev": "pnpm --filter @dawn-ui/play dev",
     "docs:dev": "pnpm --filter @dawn-ui/docs dev",
     "docs:build": "pnpm --filter @dawn-ui/docs build",
-    "test": "echo '暂无测试'"
+    "test": "pnpm --filter @dawn-ui/components test"
   },
   "keywords": [],
   "author": "",
