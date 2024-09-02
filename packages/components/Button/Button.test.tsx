@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 
 import Button from './Button.vue'
@@ -63,6 +63,18 @@ describe('Button.vue', () => {
   it('should emits a click event when the button is clicked', async () => {
     const wrapper = mount(Button, {})
     await wrapper.trigger('click')
+    expect(wrapper.emitted().click).toHaveLength(1)
+  })
+
+  // 测试节流模式
+  it('applies throttle when use-throttle prop is true', async () => {
+    const wrapper = mount(Button, {
+      props: { useThrottle: true },
+    })
+    wrapper.trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 100))
+    wrapper.trigger('click')
+    await new Promise((resolve) => setTimeout(resolve, 100))
     expect(wrapper.emitted().click).toHaveLength(1)
   })
 })
