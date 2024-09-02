@@ -6,7 +6,7 @@ const onClick = () => {
 </script>
 
 <template>
-  <DButton type="primary" size="large" @click="onClick">按钮</DButton>
+  <DButton type="primary" size="large" :throttleDuration="5000" @click="onClick">按钮</DButton>
 </template>
 
 <style scoped></style>
