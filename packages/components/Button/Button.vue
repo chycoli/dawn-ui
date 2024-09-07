@@ -1,25 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { throttle } from 'lodash-es'
-import type { ButtonProps, ButtonEmits, ButtonInstance } from './types.ts'
+import type { ButtonProps, ButtonEmits, ButtonInstance } from './types'
+import DIcon from '../Icon/Icon.vue'
+
 defineOptions({
   name: 'DButton',
 })
 
+const _ref = ref<HTMLButtonElement>()
 const props = withDefaults(defineProps<ButtonProps>(), {
   tag: 'button',
   nativeType: 'button',
-  useThrottle: true,
+  useThrottle: false,
   throttleDuration: 500,
 })
-
 const emits = defineEmits<ButtonEmits>()
-const handleBtnClick = (e: MouseEvent) => emits('click', e)
-const handleBtnClickThrottle = throttle(handleBtnClick, props.throttleDuration)
-
 const slots = defineSlots()
+const iconStyle = computed(() => ({
+  marginRight: slots.default ? '6px' : '0',
+}))
 
-const _ref = ref<HTMLButtonElement>()
+const handleBtnClick = (e: MouseEvent) => {
+  emits('click', e)
+}
+const handleBtnClickThrottle = throttle(handleBtnClick, props.throttleDuration, {
+  trailing: false,
+})
+
 defineExpose<ButtonInstance>({
   ref: _ref,
 })
@@ -31,7 +39,8 @@ defineExpose<ButtonInstance>({
     :ref="_ref"
     class="d-button"
     :type="tag === 'button' ? nativeType : void 0"
-    :disabled="disabled || loading"
+    :disabled="disabled || loading ? true : void 0"
+    :autofocus="autofocus"
     :class="{
       'is-circle': circle,
       'is-disabled': disabled,
@@ -43,6 +52,14 @@ defineExpose<ButtonInstance>({
     }"
     @click="(e: MouseEvent) => (useThrottle ? handleBtnClickThrottle(e) : handleBtnClick(e))"
   >
+    <template v-if="loading">
+      <slot name="loading">
+        <DIcon class="loading-icon" :icon="loadingIcon ?? 'spinner'" size="1x" :style="iconStyle" />
+      </slot>
+    </template>
+
+    <DIcon v-if="icon && !loading" :icon="icon" size="1x" :style="iconStyle" />
+
     <slot></slot>
   </component>
 </template>

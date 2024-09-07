@@ -1,4 +1,5 @@
-import { DButton } from "@dawn-ui/components";
 import type { Plugin } from "vue";
+import { DIcon } from "@dawn-ui/components";
+import { DButton } from "@dawn-ui/components";
 
-export default [DButton] as Plugin[];
+export default [DButton, DIcon] as Plugin[];

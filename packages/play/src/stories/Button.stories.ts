@@ -62,8 +62,6 @@ export const Default: Story & { args: { content: string } } = {
   },
   args: {
     content: "Button",
-    useThrottle: true,
-    throttleDuration: 5000
   },
   render: (args) => ({
     components: { DButton },
