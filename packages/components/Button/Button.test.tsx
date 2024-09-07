@@ -1,7 +1,8 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, test, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 
 import Button from './Button.vue'
+import Icon from '../Icon/Icon.vue'
 
 describe('Button.vue', () => {
   // Props: type
@@ -37,7 +38,7 @@ describe('Button.vue', () => {
     const wrapper = mount(Button, {
       props: { [prop]: true },
       global: {
-        stubs: ['ErIcon'],
+        stubs: ['DIcon'],
       },
     })
     expect(wrapper.classes()).toContain(className)
@@ -77,4 +78,90 @@ describe('Button.vue', () => {
     await new Promise((resolve) => setTimeout(resolve, 100))
     expect(wrapper.emitted().click).toHaveLength(1)
   })
+
+    // Exception Handling: loading state
+    it("should display loading icon and not emit click event when button is loading", async () => {
+      const wrapper = mount(Button, {
+        props: { loading: true },
+        global: {
+          stubs: ["DIcon"],
+        },
+      });
+      const iconElement = wrapper.findComponent(Icon);
+  
+      expect(wrapper.find(".loading-icon").exists()).toBe(true);
+      expect(iconElement.exists()).toBeTruthy();
+      expect(iconElement.attributes("icon")).toBe("spinner");
+      await wrapper.trigger("click");
+      expect(wrapper.emitted("click")).toBeUndefined();
+    });
+
+    test("disabled button", async () => {
+      const onClick = vi.fn();
+      const wrapper = mount(() => (
+        <Button disabled onClick={onClick}>
+          disabled button
+        </Button>
+      ));
+  
+      // class
+      expect(wrapper.classes()).toContain("is-disabled");
+  
+      // attrs
+      expect(wrapper.attributes("disabled")).toBeDefined();
+      expect(wrapper.find("button").element.disabled).toBeTruthy();
+  
+      // events
+      await wrapper.get("button").trigger("click");
+      // expect(onClick).toHaveBeenCalledOnce();
+      expect(wrapper.emitted("click")).toBeUndefined();
+    });
+  
+    test("loading button", () => {
+      const wrapper = mount(Button, {
+        props: {
+          loading: true,
+        },
+        slots: {
+          default: "loading button",
+        },
+        global: {
+          stubs: ["DIcon"],
+        },
+      });
+  
+      // class
+      expect(wrapper.classes()).toContain("is-loading");
+  
+      // attrs
+      expect(wrapper.attributes("disabled")).toBeDefined();
+      expect(wrapper.find("button").element.disabled).toBeTruthy();
+  
+      // events
+      wrapper.get("button").trigger("click");
+      expect(wrapper.emitted()).not.toHaveProperty("click");
+  
+      // icon
+      const iconElement = wrapper.findComponent(Icon);
+      expect(iconElement.exists()).toBeTruthy();
+      expect(iconElement.attributes("icon")).toBe("spinner");
+    });
+  
+    test("icon button", () => {
+      const wrapper = mount(Button, {
+        props: {
+          icon: "arrow-up",
+        },
+        slots: {
+          default: "icon button",
+        },
+        global: {
+          stubs: ["DIcon"],
+        },
+      });
+  
+      const iconElement = wrapper.findComponent(Icon);
+      expect(iconElement.exists()).toBeTruthy();
+      expect(iconElement.attributes("icon")).toBe("arrow-up");
+    });
 })

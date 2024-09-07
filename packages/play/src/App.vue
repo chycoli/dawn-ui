@@ -7,7 +7,7 @@ const onClick = () => {
 
 <template>
   <DIcon icon="search"></DIcon>
-  <DButton type="primary" size="large" icon="search" :throttleDuration="5000" @click="onClick">按钮</DButton>
+  <DButton type="primary" circle size="large" icon="search" :throttleDuration="5000" @click="onClick"></DButton>
 </template>
 
 <style scoped></style>

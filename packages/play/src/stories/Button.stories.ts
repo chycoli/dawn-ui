@@ -2,7 +2,7 @@ import type { Meta, StoryObj, ArgTypes } from "@storybook/vue3";
 import { fn, within, userEvent, expect } from "@storybook/test"
 import { DButton } from "dawn-ui";
 
-type Story = StoryObj<typeof DButton> & { argTypes: ArgTypes };
+type Story = StoryObj<typeof DButton> & { argTypes?: ArgTypes };
 
 const meta: Meta<typeof DButton> = {
   title: "Button",
@@ -80,5 +80,30 @@ export const Default: Story & { args: { content: string } } = {
     expect(args.onClick).toHaveBeenCalled()
   },
 }
+
+export const Circle: Story = {
+  args: {
+    icon: "search",
+  },
+  render: (args) => ({
+    components: { DButton },
+    setup() {
+      return { args };
+    },
+    template: container(`
+      <d-button circle v-bind="args"/>
+    `),
+  }),
+  play: async ({ canvasElement, args, step }) => {
+    const canvas = within(canvasElement);
+    await step("click button", async () => {
+      await userEvent.click(canvas.getByRole("button"));
+    });
+
+    expect(args.onClick).toHaveBeenCalled();
+  },
+};
+
+Circle.parameters = {};
 
 export default meta;
