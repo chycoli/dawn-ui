@@ -1,8 +1,9 @@
 import { describe, it, test, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 
-import Button from './Button.vue'
 import Icon from '../Icon/Icon.vue'
+import Button from './Button.vue'
+import ButtonGroup from './ButtonGroup.vue'
 
 describe('Button.vue', () => {
   // Props: type
@@ -165,3 +166,59 @@ describe('Button.vue', () => {
       expect(iconElement.attributes("icon")).toBe("arrow-up");
     });
 })
+
+describe("ButtonGroup.vue", () => {
+  test("basic button group", async () => {
+    const wrapper = mount(() => (
+      <ButtonGroup>
+        <Button>button 1</Button>
+        <Button>button 2</Button>
+      </ButtonGroup>
+    ));
+
+    expect(wrapper.classes()).toContain("d-button-group");
+  });
+
+  test("button group size", () => {
+    const sizes = ["large", "default", "small"];
+    sizes.forEach((size) => {
+      const wrapper = mount(() => (
+        <ButtonGroup size={size as any}>
+          <Button>button 1</Button>
+          <Button>button 2</Button>
+        </ButtonGroup>
+      ));
+
+      const buttonWrapper = wrapper.findComponent(Button);
+      expect(buttonWrapper.classes()).toContain(`d-button--${size}`);
+    });
+  });
+
+  test("button group type", () => {
+    const types = ["primary", "success", "warning", "danger", "info"];
+    types.forEach((type) => {
+      const wrapper = mount(() => (
+        <ButtonGroup type={type as any}>
+          <Button>button 1</Button>
+          <Button>button 2</Button>
+        </ButtonGroup>
+      ));
+
+      const buttonWrapper = wrapper.findComponent(Button);
+      expect(buttonWrapper.classes()).toContain(`d-button--${type}`);
+    });
+  });
+
+  test("button group disabled", () => {
+    const wrapper = mount(() => (
+      <ButtonGroup disabled>
+        <Button>button 1</Button>
+        <Button>button 2</Button>
+      </ButtonGroup>
+    ));
+
+    const buttonWrapper = wrapper.findComponent(Button);
+    expect(buttonWrapper.classes()).toContain(`is-disabled`);
+  });
+});
+
