@@ -1,6 +1,6 @@
 import type { Meta, StoryObj, ArgTypes } from '@storybook/vue3'
 import { fn, within, userEvent, expect } from '@storybook/test'
-import { DButton, DButtonGroup } from 'dawn-ui'
+import { DButton, DButtonGroup } from 'dawn-ui-vue3'
 
 type Story = StoryObj<typeof DButton> & { argTypes?: ArgTypes }
 

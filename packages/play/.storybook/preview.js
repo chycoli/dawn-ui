@@ -1,4 +1,4 @@
-import 'dawn-ui/dist/index.css'
+import 'dawn-ui-vue3/dist/index.css'
 
 /** @type { import('@storybook/vue3').Preview } */
 const preview = {

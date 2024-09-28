@@ -17,7 +17,7 @@ importers:
       '@dawn-ui/utils':
         specifier: workspace:*
         version: link:packages/utils
-      dawn-ui:
+      dawn-ui-vue3:
         specifier: workspace:*
         version: link:packages/core
       lodash-es:

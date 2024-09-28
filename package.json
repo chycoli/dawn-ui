@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run build && pnpm --filter @dawn-ui/play dev",
-    "build": "pnpm --filter dawn-ui build",
+    "build": "pnpm --filter dawn-ui-vue3 build",
     "story": "npm run build && pnpm --filter @dawn-ui/play storybook",
     "docs:dev": "pnpm --filter @dawn-ui/docs dev",
     "docs:build": "pnpm --filter @dawn-ui/docs build",
     "test": "pnpm --filter @dawn-ui/components test",
-    "release": "pnpm --filter dawn-ui release"
+    "release": "pnpm --filter dawn-ui-vue3 release"
   },
   "keywords": [],
   "author": "",
@@ -44,7 +44,7 @@
     "@dawn-ui/hooks": "workspace:*",
     "@dawn-ui/theme": "workspace:*",
     "@dawn-ui/utils": "workspace:*",
-    "dawn-ui": "workspace:*",
+    "dawn-ui-vue3": "workspace:*",
     "lodash-es": "^4.17.21",
     "vue": "^3.4.19"
   }
