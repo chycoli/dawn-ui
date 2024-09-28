@@ -1,3 +1,5 @@
+import 'dawn-ui/dist/index.css'
+
 /** @type { import('@storybook/vue3').Preview } */
 const preview = {
   parameters: {
@@ -8,6 +10,6 @@ const preview = {
       },
     },
   },
-};
+}
 
-export default preview;
+export default preview
