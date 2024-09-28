@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm --filter @dawn-ui/play dev",
+    "dev": "npm run build && pnpm --filter @dawn-ui/play dev",
     "build": "pnpm --filter dawn-ui build",
-    "story": "pnpm --filter @dawn-ui/play storybook",
+    "story": "npm run build && pnpm --filter @dawn-ui/play storybook",
     "docs:dev": "pnpm --filter @dawn-ui/docs dev",
     "docs:build": "pnpm --filter @dawn-ui/docs build",
     "test": "pnpm --filter @dawn-ui/components test",
